@@ -1,0 +1,48 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+#newTodoInputWrapper {
+  width: 50%;
+  margin: 0 auto;
+}
+
+// .inputAndButton {
+//   margin: 0 auto;
+//   width: 50%;
+// }
+
+.goalInput {
+  border-color: antiquewhite;
+  border-width: 3px;
+  border-radius: 5px;
+  border-style: ridge;
+  width: 300px;
+}
+
+.goalInput:focus {
+  outline: none;
+}
+
+.todoBox {
+  width: 400px;
+  overflow: hidden;
+  height:auto;
+  background-color: antiquewhite;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.todoList {
+
+}
+
+.todoListItem {
+  padding: 10px;
+  // TODO ellipsis here -> overflow: hidden;
+  // width:
+}

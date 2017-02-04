@@ -1,0 +1,40 @@
+{
+  "name": "Journal-and-Planner",
+  "version": "1.0.0",
+  "description": "A handy web app to do everyday journaling online and to maintain a list of Todos and set Goals in your life. Also, constantly monitor them!",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 1",
+    "webpack-server": "webpack-dev-server --hot --progress --colors",
+    "web-server": "http-server -p 3000",
+    "start": "npm run webpack-server & npm run web-server"
+  },
+  "keywords": [],
+  "author": "Karan Vyas",
+  "devDependencies": {
+    "autoprefixer-loader": "^3.1.0",
+    "babel-core": "^6.3.21",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "css-loader": "^0.23.0",
+    "file-loader": "^0.8.4",
+    "http-server": "^0.8.0",
+    "img-loader": "^1.2.0",
+    "node-sass": "^3.2.0",
+    "postcss-loader": "^0.8.0",
+    "react": "^15.4.2",
+    "react-hot-loader": "^1.2.8",
+    "sass-loader": "^3.1.2",
+    "source-map-loader": "^0.1.5",
+    "style-loader": "^0.13.0",
+    "svgo": "^0.6.1",
+    "svgo-loader": "^1.1.0",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.11.0",
+    "webpack-dev-server": "^1.10.1"
+  },
+  "dependencies": {
+    "react-dom": "^15.4.2"
+  }
+}
