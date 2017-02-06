@@ -16,7 +16,7 @@ export default class Container extends React.Component {
   render(){
     return(
       <div>
-        <GoalBox FBW={this.props.FBW} />
+        <Journal FBW={this.props.FBW} />
       </div>
     );
   }

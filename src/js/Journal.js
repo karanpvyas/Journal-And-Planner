@@ -1,6 +1,7 @@
 //why even create a component for this?
 
 import React from 'react'
+import DatePicker from './DatePicker'
 
 export default class Journal extends React.Component {
 
@@ -39,12 +40,12 @@ export default class Journal extends React.Component {
       [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
       [{ 'font': [] }],
       [{ 'align': [] }],
-      ['image', 'link'],
+      [/*'image',*/ 'link'], //want to add image, but bandwidth and speed :(
 
       ['clean']                                         // remove formatting button
     ];
 
-    var quill = new Quill('#journalEditor', {
+    this.quill = new Quill('#journalEditor', {
       theme: 'snow',
       placeholder: 'How was today?',
       modules: {
@@ -52,19 +53,50 @@ export default class Journal extends React.Component {
       },
     });
 
-    quill.on('text-change', function(a,b,c){
-      this.setState(
-        {
-          journalHTML: quill.container.firstChild.innerHTML,
-          journalContent: JSON.stringify(quill.getContents())
+    this.loadJournal(this.refs.DatePicker.state.dateID);
+
+    this.quill.on('text-change', (a,b,c) => {
+      if(c == 'api'){
+        return
+      } //this wont be a user generated change.
+      // console.log(JSON.stringify(this.quill.getContents()))
+      console.log('content changed');
+      let stateObj = {
+        journalHTML: this.quill.container.firstChild.innerHTML,
+        journalContent: JSON.stringify(this.quill.getContents())
+      }
+      this.props.FBW.write('journals/'+this.refs.DatePicker.state.dateID+'/', JSON.stringify(stateObj)).then(
+        () => {
+          this.setState(stateObj);
         }
-    );
-    }.bind(this));
+      )
+    })
+  }
+
+  loadJournal = (dateID) => {
+    console.log('this dateID came: ', dateID);
+    this.quill.setContents(null)
+    this.props.FBW.read('/journals/'+dateID+'/').then(
+      (data) => {
+        console.log('data came:', data);
+        if(data == null){
+          console.log('no data');
+        }else{
+          this.setState(JSON.parse(data))
+          this.quill.setContents(JSON.parse(JSON.parse(data).journalContent))
+        }
+      }
+    ).catch(
+      (error) => {
+        console.log('error in loadJournal function: ', error);
+      }
+    )
   }
 
   render(){
     return (
       <div>
+      <DatePicker ref = 'DatePicker' loadJournal={this.loadJournal} />
       </div>
     )
   }
