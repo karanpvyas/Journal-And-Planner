@@ -41,19 +41,22 @@ export default class FireBaseWrapper {
   }
 
   write = (path, data) => {
-    return this.database.ref(path).set(data);
+    return this.database.ref('users/'+this.user.uid+'/'+path).set(data);
   }
 
   //see how to return yo.
   read = (path) => {
-    database.ref(path).once('value').then(
-      function(snapshot){
-        return snapshot.val();
-      }
-    ).catch(function(error){
-      console.log(error);
-      return error;
-    })
-  }
+    return new Promise((resolve, reject) => {
+      this.database.ref('users/'+this.user.uid+'/'+path).once('value').then(
+        (snapshot) => {
+          resolve(snapshot.val());
+        }
+      ).catch(
+        (error) => {
+          console.log(error);
+          reject(console.error());
+        })
+      });
+    }
 
-}
+  }

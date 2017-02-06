@@ -16,7 +16,7 @@ export default class Container extends React.Component {
   render(){
     return(
       <div>
-        <TodoBox />
+        <TodoBox FBW={this.props.FBW} />
       </div>
     );
   }

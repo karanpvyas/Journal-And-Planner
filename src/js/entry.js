@@ -7,8 +7,7 @@ let FBW = new FireBaseWrapper();
 
 FBW.setup().then(
   function(user){
-    console.log(user);
-    render(<Container />, document.querySelector('#JournalAndPlannerApp'));
+    render(<Container FBW={FBW} />, document.querySelector('#JournalAndPlannerApp'));
   }
 ).catch(
   function(error){

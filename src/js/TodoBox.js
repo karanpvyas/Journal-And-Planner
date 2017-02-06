@@ -2,19 +2,41 @@ import React from 'react';
 import TodoList from './TodoList'
 
 export default class TodoBox extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
-    this.state = {
-      allTodos: [
-        {
-          todoText: 'demo todo',
-          timeCreated: 123123,
-          timeCreatedString: '',
-          status: 'Incomplete'
+    this.props.FBW.read('todos/').then(
+      (data) => {
+        if(data == null){
+          this.setState({
+            allTodos: []
+          });
+        }else{
+          this.setState({
+            allTodos: JSON.parse(data.allTodos)
+          })
         }
-      ]
+      }
+    )
+    // this.state = {
+    //   allTodos: [
+    //     {
+    //       todoText: 'demo todo',
+    //       timeCreated: 123123,
+    //       timeCreatedString: '',
+    //       status: 'Incomplete'
+    //     }
+    //   ]
+    // }
+    this.state = {
+      allTodos: []
     }
+  }
+
+  _setState = (allTodos) => {
+    this.props.FBW.write('todos/', {allTodos:JSON.stringify(allTodos)}).then(() => {
+      this.setState({allTodos});
+    })
   }
 
   addTodo = (event) => {
@@ -30,7 +52,7 @@ export default class TodoBox extends React.Component {
       timeCreated,
       status: 'Incomplete'
     })
-    this.setState({allTodos});
+    this._setState(allTodos);
   }
 
   completeTodo = (timeCreated) => {
@@ -41,13 +63,13 @@ export default class TodoBox extends React.Component {
         todo.status = 'Complete'
       }
     }
-    this.setState({allTodos});
+    this._setState(allTodos);
   }
 
   deleteTodo = (timeCreated) => {
-    this.setState({allTodos:this.state.allTodos.filter(function(todo){
+    this._setState(this.state.allTodos.filter(function(todo){
       return timeCreated !== todo.timeCreated;
-    })})
+    }))
   }
 
   render(){
