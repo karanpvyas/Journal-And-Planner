@@ -3,8 +3,8 @@ import ContentEditable from './ContentEditable'
 
 export default class GoalBox extends React.Component {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       goal5Years: 'Become richie rich, perform a song somewhere, buy at least 2 exotic cars',
       goal1Year: 'This is my 1 year goal',
