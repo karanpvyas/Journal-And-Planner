@@ -19,7 +19,12 @@ export default class ContentEditable extends React.Component {
     }else if (event.type === 'change'){
       this.setState({text: event.target.value});
     }
+  }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      text: nextProps.passedText
+    })
   }
 
   render(){
