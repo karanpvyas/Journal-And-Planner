@@ -1,7 +1,7 @@
 //why even create a component for this?
 
 import React from 'react'
-import DatePicker from './DatePicker'
+import DatePickerReact from './DatePickerReact'
 
 export default class Journal extends React.Component {
 
@@ -15,14 +15,6 @@ export default class Journal extends React.Component {
   }
 
   componentDidMount() {
-
-    //TODO any better way for this?
-    // let editor = document.createElement('div');
-    // let toolbar = document.createElement('div');
-    // editor.id = "journalEditor";
-    // toolbar.id = "toolbar";
-    // document.querySelector('body').appendChild(toolbar);
-    // document.querySelector('body').appendChild(editor);
 
     var toolbarOptions = [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -53,7 +45,9 @@ export default class Journal extends React.Component {
       },
     });
 
-    this.loadJournal(this.refs.DatePicker.state.dateID);
+    this.loadJournal(this.refs.DatePickerReact.state.dateID);
+
+    this.quill.format('font-family', 'Rubik');
 
     this.quill.on('text-change', (a,b,c) => {
       if(c == 'api'){
@@ -65,7 +59,7 @@ export default class Journal extends React.Component {
         journalHTML: this.quill.container.firstChild.innerHTML,
         journalContent: JSON.stringify(this.quill.getContents())
       }
-      this.props.FBW.write('journals/'+this.refs.DatePicker.state.dateID+'/', JSON.stringify(stateObj)).then(
+      this.props.FBW.write('journals/'+this.refs.DatePickerReact.state.dateID+'/', JSON.stringify(stateObj)).then(
         () => {
           this.setState(stateObj);
         }
@@ -96,7 +90,12 @@ export default class Journal extends React.Component {
   render(){
     return (
       <div id="journal">
-        <DatePicker ref = 'DatePicker' loadJournal={this.loadJournal} />
+        <h2 className="panelHeader">
+          Journal
+        </h2>
+        <div className="centered">
+          <DatePickerReact ref = 'DatePickerReact' loadJournal={this.loadJournal} />
+        </div>
         <div id="journalEditor">
           <div id="toolbar">
           </div>
