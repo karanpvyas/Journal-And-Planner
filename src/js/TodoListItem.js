@@ -9,19 +9,25 @@ export default class TodoListItem extends React.Component {
   render(){
 
     let green = {};
+    let done = null;
     if(this.props.status === 'Complete') {
       green = {
-        color: 'green'
+        color: 'green',
+        backgroundColor: 'lightgreen',
+        borderRadius: '10px'
       }
+      done = <span style={{color:'green',borderRadius:'6px',backgroundColor:'#00EE00',fontSize:'10px',padding:'2px 4px 2px 4px',marginLeft:'4px'}}>Done</span>
     }
 
     return(
       <span>
-        <span style={green}>
+        <span className="todoTextDiv">
           {this.props.todoText}
         </span>
-        <span>
-          {this.props.timeCreatedString}
+        {done}
+        <br />
+        <span className="label">
+          Added at: {this.props.timeCreatedString}
         </span>
       </span>
     )

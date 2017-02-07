@@ -6,7 +6,8 @@
     "test": "echo \"No tests yet\" && exit 1",
     "webpack-server": "webpack-dev-server --hot --progress --colors",
     "web-server": "http-server -p 3000",
-    "start": "npm run webpack-server & npm run web-server"
+    "start": "npm run webpack-server & npm run web-server",
+    "build": "webpack -p ./src/js/entry.js"
   },
   "keywords": [],
   "author": "Karan Vyas",

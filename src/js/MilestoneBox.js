@@ -68,7 +68,7 @@ export default class MilestoneBox extends React.Component {
       )
     })
     return(
-      <div>
+      <div id="milestoneBox">
       <DatePickerReact ref="DatePickerReact" />
       <input id = "newMilestoneTextInput" type="text" />
       <br />

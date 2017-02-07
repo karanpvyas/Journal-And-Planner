@@ -17,12 +17,12 @@ export default class Journal extends React.Component {
   componentDidMount() {
 
     //TODO any better way for this?
-    let editor = document.createElement('div');
-    let toolbar = document.createElement('div');
-    editor.id = "journalEditor";
-    toolbar.id = "toolbar";
-    document.querySelector('body').appendChild(toolbar);
-    document.querySelector('body').appendChild(editor);
+    // let editor = document.createElement('div');
+    // let toolbar = document.createElement('div');
+    // editor.id = "journalEditor";
+    // toolbar.id = "toolbar";
+    // document.querySelector('body').appendChild(toolbar);
+    // document.querySelector('body').appendChild(editor);
 
     var toolbarOptions = [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -95,8 +95,12 @@ export default class Journal extends React.Component {
 
   render(){
     return (
-      <div>
-      <DatePicker ref = 'DatePicker' loadJournal={this.loadJournal} />
+      <div id="journal">
+        <DatePicker ref = 'DatePicker' loadJournal={this.loadJournal} />
+        <div id="journalEditor">
+          <div id="toolbar">
+          </div>
+        </div>
       </div>
     )
   }

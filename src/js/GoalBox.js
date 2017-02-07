@@ -45,7 +45,7 @@ export default class GoalBox extends React.Component {
 
   render(){
     return(
-      <div>
+      <div id="goalBox">
       <h3> Press enter to save them</h3>
         5 year goal
         <ContentEditable ref="5year" passedText={this.state.goal5Years} updateGoals={this.updateGoals} />

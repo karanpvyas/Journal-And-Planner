@@ -36,13 +36,20 @@ export default class TodoBox extends React.Component {
   _setState = (allTodos) => {
     this.props.FBW.write('todos/', {allTodos:JSON.stringify(allTodos)}).then(() => {
       this.setState({allTodos});
+      document.querySelector('#newTodoInput').value = "";
     })
   }
 
-  addTodo = (event) => {
+  addTodo = () => {
     let todoText = document.querySelector('#newTodoInput').value;
+
+    if(todoText.length <= 3){
+      alert('length must be more');
+      return;
+    }
+
     let dateObj = new Date();
-    let timeCreatedString = dateObj.toTimeString()
+    let timeCreatedString = dateObj.toTimeString() +' on '+dateObj.toDateString();
     let timeCreated = dateObj.valueOf();
 
     let allTodos = this.state.allTodos;
@@ -72,12 +79,21 @@ export default class TodoBox extends React.Component {
     }))
   }
 
+  checkForEnter = (e) => {
+    if((e.keyCode || e.which) == 13 ){
+      this.addTodo();
+    }
+  }
+
   render(){
     return(
-      <div className = "todoBox" >
+      <div id="todoBox">
+        <h2 className="panelHeader">
+          Todo Manager
+        </h2>
         <div id="newTodoInputWrapper">
-          <input id = "newTodoInput" type="text" />
-          <button onClick={this.addTodo}>add</button>
+          <input id = "newTodoInput" type="text" placeholder="Any work pending?" onKeyDown={this.checkForEnter.bind(this)} />
+          <button onClick={this.addTodo} className="standard-add-button">Add</button>
         </div>
         <TodoList allTodos={this.state.allTodos} deleteTodo={this.deleteTodo} completeTodo={this.completeTodo}/>
       </div>
