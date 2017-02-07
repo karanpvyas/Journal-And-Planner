@@ -6,6 +6,7 @@ import ContentEditable from './ContentEditable'
 import GoalBox from './GoalBox'
 import Journal from './Journal'
 import DatePicker from './DatePicker'
+import MilestoneBox from './MilestoneBox'
 
 export default class Container extends React.Component {
 
@@ -16,7 +17,7 @@ export default class Container extends React.Component {
   render(){
     return(
       <div>
-        <Journal FBW={this.props.FBW} />
+        <MilestoneBox FBW={this.props.FBW} />
       </div>
     );
   }
