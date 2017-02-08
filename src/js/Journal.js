@@ -9,9 +9,12 @@ export default class Journal extends React.Component {
     super(props);
 
     this.state = {
-      journalHTML : '',
+      journalHTML: '',
       journalContent: ''
     }
+
+    this.allowUpdate= true;
+    this.isPure= true;
   }
 
   componentDidMount() {
@@ -53,17 +56,14 @@ export default class Journal extends React.Component {
       if(c == 'api'){
         return
       } //this wont be a user generated change.
-      // console.log(JSON.stringify(this.quill.getContents()))
-      console.log('content changed');
-      let stateObj = {
-        journalHTML: this.quill.container.firstChild.innerHTML,
-        journalContent: JSON.stringify(this.quill.getContents())
-      }
-      this.props.FBW.write('journals/'+this.refs.DatePickerReact.state.dateID+'/', JSON.stringify(stateObj)).then(
-        () => {
-          this.setState(stateObj);
-        }
-      )
+      
+      //magic!
+      this.isPure = false;
+
+      //TODO any better alrernative? Except DOM manipulation ofc.
+      this.forceUpdate();
+
+      this.syncTheContent();
     })
   }
 
@@ -87,14 +87,47 @@ export default class Journal extends React.Component {
     )
   }
 
+  syncTheContent = () => {
+    if(this.isPure) return;
+    if(!this.allowUpdate) return;
+    this.allowUpdate = false;
+    this.isPure = true;
+    let stateObj = {
+      journalHTML: this.quill.container.firstChild.innerHTML,
+      journalContent: JSON.stringify(this.quill.getContents())
+    }
+    this.props.FBW.write('journals/'+this.refs.DatePickerReact.state.dateID+'/', JSON.stringify(stateObj)).then(
+      () => {
+        this.setState(stateObj, () => {
+          setTimeout( () => {
+            this.allowUpdate = true;
+            this.syncTheContent(); //i am not god
+          }, 3000)
+        });
+      }
+    ).catch((error) => {
+      console.log('error from journal #asdadh ' + error);
+    })
+  }
+
   render(){
+    let syncValue;
+    if(this.isPure){
+      syncValue = 'In sync with cloud ✓'
+    }else{
+      syncValue = 'Syncing . . .'
+    }
     return (
       <div id="journal">
         <h2 className="panelHeader">
           Journal
         </h2>
-        <div className="centered">
-          <DatePickerReact ref = 'DatePickerReact' loadJournal={this.loadJournal} />
+        <div className="journalTop">
+          <div className="justForFont centered">
+            Date:&nbsp;
+            <DatePickerReact ref = 'DatePickerReact' loadJournal={this.loadJournal} />
+          </div>
+          <div className="justForFont smallFont">{syncValue}</div>
         </div>
         <div id="journalEditor">
           <div id="toolbar">
