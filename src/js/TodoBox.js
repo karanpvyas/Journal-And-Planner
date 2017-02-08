@@ -1,23 +1,32 @@
 import React from 'react';
 import TodoList from './TodoList'
+import * as loader from './loaderAnimation';
 
 export default class TodoBox extends React.Component {
   constructor(props){
     super(props);
 
+    loader.start();
     this.props.FBW.read('todos/').then(
       (data) => {
         if(data == null){
           this.setState({
             allTodos: []
+          },() => {
+            loader.stop()
           });
         }else{
           this.setState({
             allTodos: JSON.parse(data.allTodos)
+          },() => {
+            loader.stop()
           })
         }
       }
-    )
+    ).catch((error)=>{
+      console.log('error from todobox while reading ' + error);
+      loader.stop();
+    })
     // this.state = {
     //   allTodos: [
     //     {
@@ -34,9 +43,15 @@ export default class TodoBox extends React.Component {
   }
 
   _setState = (allTodos) => {
+    loader.start();
     this.props.FBW.write('todos/', {allTodos:JSON.stringify(allTodos)}).then(() => {
-      this.setState({allTodos});
+      this.setState({allTodos}, () => {
+        loader.stop()
+      });
       document.querySelector('#newTodoInput').value = "";
+    }).catch((error)=>{
+      console.log('error while wwriting in todobox '+error);
+      loader.stop();
     })
   }
 

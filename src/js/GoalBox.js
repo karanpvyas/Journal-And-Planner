@@ -1,17 +1,24 @@
 import React from 'react'
 import ContentEditable from './ContentEditable'
 
+import * as loader from './loaderAnimation';
+
 export default class GoalBox extends React.Component {
 
   constructor(props){
     super(props);
+    loader.start();
     this.props.FBW.read('goals/').then(
       (data) => {
         console.log(data);
         if(data == null){
-          this.setState({});
+          this.setState({}, () => {
+            loader.stop()
+          });
         }else{
-          this.setState(JSON.parse(data))
+          this.setState(JSON.parse(data), () => {
+            loader.stop()
+          })
         }
       }
     )
@@ -27,8 +34,14 @@ export default class GoalBox extends React.Component {
   }
 
   _setState = (goals) => {
+    loader.start();
     this.props.FBW.write('goals/', JSON.stringify(goals)).then(() => {
-      this.setState(goals);
+      this.setState(goals,() => {
+        loader.stop()
+      });
+    }).catch((error)=>{
+      console.log('error in goalbox.js 12312 ' + error);
+      loader.stop()
     })
   }
 
@@ -90,6 +103,4 @@ export default class GoalBox extends React.Component {
       </div>
     )
   }
-
-
 }

@@ -2,18 +2,26 @@ import React from 'react'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePickerReact from './DatePickerReact'
+
+import * as loader from './loaderAnimation';
+
 export default class MilestoneBox extends React.Component {
 
   constructor(props){
     super(props)
 
+    loader.start();
     this.props.FBW.read('milestones/').then(
       (data) => {
         console.log(data);
         if(data == null){
-          this.setState({});
+          this.setState({}, () => {
+            loader.stop()
+          });
         }else{
-          this.setState({milestones: JSON.parse(data)})
+          this.setState({milestones: JSON.parse(data)}, () => {
+            loader.stop()
+          })
         }
       }
     )
@@ -38,9 +46,15 @@ export default class MilestoneBox extends React.Component {
   }
 
   _setState = (milestones) => {
+    loader.start();
     this.props.FBW.write('milestones/', JSON.stringify(milestones)).then(() => {
-      this.setState({milestones: milestones});
+      this.setState({milestones: milestones}, () => {
+        loader.stop()
+      });
       document.querySelector('#newMilestoneTextInput').value = "";
+    }).catch((error) => {
+      console.log('error in milestonebox 13123 '+error);
+      loader.stop();
     })
   }
 

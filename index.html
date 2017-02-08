@@ -3,9 +3,32 @@
   <head>
     <title>Journal and Planner</title>
     <link href="https://cdn.quilljs.com/1.2.0/quill.snow.css" rel="stylesheet">
+    <style>
+    #loadingGIFWrapper {
+      height: 100%;
+      width: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 100;
+      position: fixed;
+      // background-color:white;
+       opacity: .75;
+    }
+
+    #loadingGIF {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      /* bring your own prefixes */
+      transform: translate(-50%, -50%);
+    }
+    </style>
   </head>
   <body>
     <div id = "JournalAndPlannerApp">
+    </div>
+    <div id="loadingGIFWrapper">
+      <img src="src/images/loading.gif" id="loadingGIF"/>
     </div>
     <script src="https://cdn.quilljs.com/1.2.0/quill.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
