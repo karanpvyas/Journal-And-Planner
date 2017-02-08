@@ -34,6 +34,7 @@ $box-shadow-color: #FFEAD0;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: flex-start;
 }
 
 #newTodoInput {
@@ -43,7 +44,7 @@ $box-shadow-color: #FFEAD0;
   width: 20vw;
   height: 30px;
   font-size: 15px;
-
+  outline: none;
   //TODO change the color and width etc.
   -webkit-box-shadow: 3px 1px 3px 2px $box-shadow-color;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    3px 1px 3px 2px $box-shadow-color;  /* Firefox 3.5 - 3.6 */
@@ -51,8 +52,6 @@ $box-shadow-color: #FFEAD0;
 }
 
 #newTodoInput:focus {
-  outline: none;
-
   //TODO change the color to a darker shade of whatever is set up above without focus and width etc.
   -webkit-box-shadow: 3px 3px 7px 2px $box-shadow-color;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    3px 3px 7px 2px $box-shadow-color;  /* Firefox 3.5 - 3.6 */
@@ -65,6 +64,20 @@ $box-shadow-color: #FFEAD0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+#newMilestoneTextInput {
+  border:none;
+  padding: 5px;
+  margin: 1vw;
+  width: 13vw;
+  height: 30px;
+  font-size: 15px;
+  outline: none;
+  //TODO change the color and width etc.
+  -webkit-box-shadow: 3px 1px 3px 2px $box-shadow-color;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 1px 3px 2px $box-shadow-color;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 1px 3px 2px $box-shadow-color; /*opera */
 }
 
 #journal {
@@ -91,18 +104,14 @@ $box-shadow-color: #FFEAD0;
 }
 
 #goalBox {
-  width: 27vw;
-  margin: 1vw;
-
+  padding: 10px;
   -webkit-box-shadow: 3px 3px 7px 2px $box-shadow-color;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    3px 3px 7px 2px $box-shadow-color;  /* Firefox 3.5 - 3.6 */
   box-shadow:         3px 3px 7px 2px $box-shadow-color; /*opera */
 }
 
 #milestoneBox {
-  width: 27vw;
-  margin: 1vw;
-
+  padding: 10px;
   -webkit-box-shadow: 3px 3px 7px 2px $box-shadow-color;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    3px 3px 7px 2px $box-shadow-color;  /* Firefox 3.5 - 3.6 */
   box-shadow:         3px 3px 7px 2px $box-shadow-color; /*opera */
@@ -127,29 +136,77 @@ body {
 
 .datePicker {
   border: none;
-  margin: 10px;
+  margin: 10px 0px 10px 0px;
   padding: 5px 0px 5px 0px;
   outline: none;
-
+  height: 30px;
+  width: 6vw;
   //TODO change the color and width etc.
   -webkit-box-shadow: 3px 1px 3px 2px $box-shadow-color;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    3px 1px 3px 2px $box-shadow-color;  /* Firefox 3.5 - 3.6 */
   box-shadow:         3px 1px 3px 2px $box-shadow-color; /*opera */
   text-align: center;
   font-family: 'Rubik';
+  cursor: pointer;
 
 }
 
+.goalsWrapper {
+  width: 27vw;
+  margin: 1vw;
+  height: auto;
+
+  -webkit-box-shadow: 3px 3px 7px 2px $box-shadow-color;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 7px 2px $box-shadow-color;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 7px 2px $box-shadow-color; /*opera */
+}
+
+.milestonesWrapper {
+  width: 27vw;
+  margin: 1vw;
+  height: auto;
+
+  -webkit-box-shadow: 3px 3px 7px 2px $box-shadow-color;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 7px 2px $box-shadow-color;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 7px 2px $box-shadow-color; /*opera */
+}
+
+.goalContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  font-family: 'Rubik', sans-serif;
+  font-size: 12px;
+}
+
+.goalType {
+  // padding: 5px;
+  border-radius: 10px;
+  font-size: 10px;
+  background-color: #EEEEEE;
+  width: auto;
+  display: inline-block;
+  padding: 0px 2px 0px 2px;
+  display: flex;
+  align-items: center;
+}
+
 .goalInput {
-  border-color: antiquewhite;
-  border-width: 3px;
-  border-radius: 5px;
-  border-style: ridge;
-  // width: 300px;
+  border: none;
+  outline: none;
+  //TODO change the color and width etc.
+  -webkit-box-shadow: 3px 1px 3px 2px $box-shadow-color;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 1px 3px 2px $box-shadow-color;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 1px 3px 2px $box-shadow-color; /*opera */
+  font-family: 'Rubik';
+  font-size: 15px;
+  padding: 5px;
+  width: 19vw;
 }
 
 .goalInput:focus {
   outline: none;
+  display: inline-block;
 }
 
 .label {
@@ -161,8 +218,26 @@ body {
   padding: 2px;
 }
 
-.padding10 {
-  // padding: 50px;
+.milestoneInputArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.milestoneDate {
+  font-family: 'Rubik', sans-serif;
+  color: antiquewhite;
+}
+
+.milestoneItem {
+  margin: 1vw;
+  padding: 10px 0 10px 0;
+}
+
+.milestoneText {
+  font-family: 'Rubik';
+  font-size: 15px;
+  word-wrap: break-word;
 }
 
 .panelHeader {
@@ -210,10 +285,11 @@ body {
   font-size: 15px;
   height: 30px;
   border: 0;
-  margin: 1.3vw;
+  margin: 0 1.3vw 0 0;
   text-decoration: none;
   display: flex;
   align-items: center;
+  outline: none;
 
 }
 
@@ -227,9 +303,48 @@ body {
   text-decoration: none;
 }
 
-.standard-add-button:focus {
+.standard-add-button-milestone {
+  // width: 5vw;
+  // height: 30px;
+  // font-family: 'Rubik' , sans-serif;
+  // font-size: 15px;
+  // line-height: 100%;
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 1px 3px #666666;
+  -moz-box-shadow: 0px 1px 3px #666666;
+  box-shadow: 0px 1px 3px #666666;
+  font-family: Rubik;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 15px;
+  height: 30px;
+  border: 0;
+  margin: 0 1.3vw 0 0;
+  text-decoration: none;
+  display: flex-inline;
+  align-items: center;
   outline: none;
+
 }
+
+.standard-add-button-milestone:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
 
 .standard-delete-button {
   // width: 5vw;
@@ -328,8 +443,6 @@ body {
   // padding: 10px 0 10px 0;
   margin: 1vw;
   padding: 10px 0 10px 0;
-  // TODO ellipsis here -> overflow: hidden;
-  // width:
 }
 
 .todoListItem  .standard-delete-button {

@@ -22,9 +22,19 @@ export default class Container extends React.Component {
         <div id='mainWrapper'>
           <TodoBox FBW={this.props.FBW} />
           <Journal FBW={this.props.FBW} />
-          <div className="padding10">
-            <GoalBox FBW={this.props.FBW} />
-            <MilestoneBox FBW={this.props.FBW} />
+          <div className="">
+            <div className="goalsWrapper">
+              <h2 className="panelHeader">
+                Goals
+              </h2>
+              <GoalBox FBW={this.props.FBW} />
+            </div>
+            <div className="milestonesWrapper">
+              <h2 className="panelHeader">
+                Achievements
+              </h2>
+              <MilestoneBox FBW={this.props.FBW} />
+            </div>
           </div>
         </div>
       </div>

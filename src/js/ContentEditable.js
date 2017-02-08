@@ -29,14 +29,14 @@ export default class ContentEditable extends React.Component {
 
   render(){
     return(
-      <div>
+      <span>
         <input
           className="goalInput"
           onChange = {this.updateText.bind(this)}
           value = {this.state.text}
           onKeyDown = {this.updateText.bind(this)}
         />
-      </div>
+      </span>
     )
   }
 }

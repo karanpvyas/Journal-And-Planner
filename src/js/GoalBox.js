@@ -46,24 +46,47 @@ export default class GoalBox extends React.Component {
   render(){
     return(
       <div id="goalBox">
-      <h3> Press enter to save them</h3>
-        5 year goal
-        <ContentEditable ref="5year" passedText={this.state.goal5Years} updateGoals={this.updateGoals} />
+        <div className="goalContainer">
+          <span className="goalType">
+            5 year goal
+          </span>
+          <ContentEditable ref="5year" passedText={this.state.goal5Years} updateGoals={this.updateGoals} />
+        </div>
 
-        1 year goal
-        <ContentEditable ref="1year" passedText={this.state.goal1Year} updateGoals={this.updateGoals}/>
+        <div className="goalContainer">
+          <span className="goalType">
+            1 year goal
+          </span>
+          <ContentEditable ref="1year" passedText={this.state.goal1Year} updateGoals={this.updateGoals}/>
+        </div>
 
-        6 months goal
-        <ContentEditable ref="6months" passedText={this.state.goal6Months} updateGoals={this.updateGoals} />
+        <div className="goalContainer">
+          <span className="goalType">
+            6 months goal
+          </span>
+          <ContentEditable ref="6months" passedText={this.state.goal6Months} updateGoals={this.updateGoals} />
+        </div>
 
-        3 months goal
-        <ContentEditable ref="3months" passedText={this.state.goal3Months} updateGoals={this.updateGoals} />
+        <div className="goalContainer">
+          <span className="goalType">
+            3 months goal
+          </span>
+          <ContentEditable ref="3months" passedText={this.state.goal3Months} updateGoals={this.updateGoals} />
+        </div>
 
-        1 month goal
-        <ContentEditable ref="1month" passedText={this.state.goal1Month} updateGoals={this.updateGoals} />
+        <div className="goalContainer">
+          <span className="goalType">
+            1 month goal
+          </span>
+          <ContentEditable ref="1month" passedText={this.state.goal1Month} updateGoals={this.updateGoals} />
+        </div>
 
-        1 week goal
-        <ContentEditable ref="1week" passedText={this.state.goal1Week} updateGoals={this.updateGoals} />
+        <div className="goalContainer">
+          <span className="goalType">
+            1 week goal
+          </span>
+          <ContentEditable ref="1week" passedText={this.state.goal1Week} updateGoals={this.updateGoals} />
+        </div>
       </div>
     )
   }

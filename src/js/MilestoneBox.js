@@ -34,17 +34,30 @@ export default class MilestoneBox extends React.Component {
   }
 
   componentDidMount(){
+
   }
 
   _setState = (milestones) => {
     this.props.FBW.write('milestones/', JSON.stringify(milestones)).then(() => {
       this.setState({milestones: milestones});
+      document.querySelector('#newMilestoneTextInput').value = "";
     })
   }
 
   addMilestone = () => {
     let milestoneTextObj = document.querySelector('#newMilestoneTextInput');
     let milestoneText = milestoneTextObj.value;
+
+    if(milestoneText.length < 6){
+      alert('length too small milestone ka')
+      return;
+    }
+
+    if(milestoneText.length > 30) {
+      alert('too big a milestone :/ add it to your journal maybe?');
+      return;
+    }
+
     let milestoneDate = this.refs.DatePickerReact.state.date._d.toLocaleString().split(',')[0];
     let milestones = this.state.milestones;
     milestones.push({milestoneText, milestoneDate})
@@ -54,26 +67,35 @@ export default class MilestoneBox extends React.Component {
     this._setState(milestones)
   }
 
+  checkForEnter = (event) => {
+    console.log(event);
+    if((event.which || event.keyCode) == 13){
+      event.preventDefault();
+      this.addMilestone();
+    }
+  }
+
   render(){
     let allMilestones = this.state.milestones.map((milestone) => {
       return(
-        <div key={milestone.milestoneDate+Math.random()}>
-        <span>
-        {milestone.milestoneText}
-        </span>
-        <span>
-        {milestone.milestoneDate}
-        </span>
+        <div className="milestoneItem" key={milestone.milestoneDate+Math.random()}>
+          <span className="milestoneText">
+            {milestone.milestoneText +" on "}
+          </span>
+          <span className="milestoneDate">
+            {milestone.milestoneDate}
+          </span>
         </div>
       )
     })
     return(
       <div id="milestoneBox">
-      <DatePickerReact ref="DatePickerReact" />
-      <input id = "newMilestoneTextInput" type="text" />
-      <br />
-      <button onClick={this.addMilestone}>add</button>
-      {allMilestones}
+        <div className="milestoneInputArea">
+          <DatePickerReact ref="DatePickerReact" />
+          <input id = "newMilestoneTextInput" type="text" placeholder="First salary?" onKeyDown={this.checkForEnter.bind(this)} />
+          <button className="standard-add-button-milestone" onClick={this.addMilestone}>Add</button>
+        </div>
+        {allMilestones}
       </div>
     )
   }
