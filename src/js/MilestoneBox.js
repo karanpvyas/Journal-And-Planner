@@ -35,7 +35,8 @@ export default class MilestoneBox extends React.Component {
     //   milestones: [
     //     {
     //       milestoneText: '',
-    //       milestoneDate: ''
+    //       milestoneDate: '',
+    //        milestoneKey: '',
     //     }
     //   ]
     // }

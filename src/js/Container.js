@@ -31,7 +31,7 @@ export default class Container extends React.Component {
             </div>
             <div className="milestonesWrapper">
               <h2 className="panelHeader">
-                Achievements
+                Achievements/Milestones
               </h2>
               <MilestoneBox FBW={this.props.FBW} />
             </div>
