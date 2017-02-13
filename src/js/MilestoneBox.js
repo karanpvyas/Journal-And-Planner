@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePickerReact from './DatePickerReact'
+import MilestoneItem from './milestoneItem'
 
 import * as loader from './loaderAnimation';
 
@@ -42,6 +43,18 @@ export default class MilestoneBox extends React.Component {
     // }
   }
 
+  updateMilestones = (milestoneObj) => {
+    console.log(milestoneObj);
+    let tempArr = this.state.milestones;
+    tempArr.forEach((obj)=>{
+      if(obj.milestoneKey === milestoneObj.milestoneKey){
+        obj.milestoneText = milestoneObj.milestoneText;
+        obj.milestoneDate = milestoneObj.milestoneDate;
+      }
+    })
+    this._setState(tempArr);
+  }
+
   componentDidMount(){
 
   }
@@ -75,7 +88,10 @@ export default class MilestoneBox extends React.Component {
 
     let milestoneDate = this.refs.DatePickerReact.state.date._d.toLocaleString().split(',')[0];
     let milestones = this.state.milestones;
-    milestones.push({milestoneText, milestoneDate})
+
+    let milestoneKey = Math.random().toString()
+
+    milestones.push({milestoneText, milestoneDate, milestoneKey})
     milestones.sort((a ,b) => {
       return a.milestoneDate.split('/').reverse().join() < b.milestoneDate.split('/').reverse().join()
     }) // so that milestones appear chronologically.
@@ -93,14 +109,7 @@ export default class MilestoneBox extends React.Component {
   render(){
     let allMilestones = this.state.milestones.map((milestone) => {
       return(
-        <div className="milestoneItem" key={milestone.milestoneDate+Math.random()}>
-          <span className="milestoneText">
-            {milestone.milestoneText +" on "}
-          </span>
-          <span className="milestoneDate">
-            {milestone.milestoneDate}
-          </span>
-        </div>
+        <MilestoneItem updateMilestones={this.updateMilestones} milestoneText={milestone.milestoneText} milestoneDate={milestone.milestoneDate} milestoneKey={milestone.milestoneKey} key={milestone.milestoneKey} />
       )
     })
     return(
