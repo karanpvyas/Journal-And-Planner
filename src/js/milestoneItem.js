@@ -46,6 +46,9 @@ export default class MilestoneItem extends React.Component {
         <span className="milestoneDate">
         {" on "+ this.state.milestoneDate}
         </span>
+        <div className="button-group-todo">
+          <button className="standard-delete-button" onClick={this.props.deleteMilestone.bind(this,this.state.milestoneKey)}>X</button>
+        </div>
       </div>
     )
   }

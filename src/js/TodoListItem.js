@@ -8,16 +8,16 @@ export default class TodoListItem extends React.Component {
 
   render(){
 
-    let greenText = '';
+    let textColor = ' incomplete-text';
     let done = null;
     if(this.props.status === 'Complete') {
-      greenText = ' greenText'
+      textColor = ' complete-text'
       done = <span className="doneText">✓</span>
     }
 
     return(
       <span>
-        <span className={"todoTextDiv" + greenText}>
+        <span className={"todoTextDiv" + textColor}>
           {this.props.todoText}
         </span>
         {done}

@@ -56,7 +56,7 @@ export default class Journal extends React.Component {
       if(c == 'api'){
         return
       } //this wont be a user generated change.
-      
+
       //magic!
       this.isPure = false;
 

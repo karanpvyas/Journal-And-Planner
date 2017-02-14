@@ -55,6 +55,17 @@ export default class MilestoneBox extends React.Component {
     this._setState(tempArr);
   }
 
+  deleteMilestone = (key) => {
+    let tempArr = this.state.milestones;
+    let i = 0;
+    for( let i = 0; i<tempArr.length; i++) {
+      if(tempArr[i].milestoneKey === key){
+        tempArr.splice(i,1);
+      }
+    }
+    this._setState(tempArr);
+  }
+
   componentDidMount(){
 
   }
@@ -109,7 +120,9 @@ export default class MilestoneBox extends React.Component {
   render(){
     let allMilestones = this.state.milestones.map((milestone) => {
       return(
-        <MilestoneItem updateMilestones={this.updateMilestones} milestoneText={milestone.milestoneText} milestoneDate={milestone.milestoneDate} milestoneKey={milestone.milestoneKey} key={milestone.milestoneKey} />
+        <div>
+          <MilestoneItem deleteMilestone={this.deleteMilestone} updateMilestones={this.updateMilestones} milestoneText={milestone.milestoneText} milestoneDate={milestone.milestoneDate} milestoneKey={milestone.milestoneKey} key={milestone.milestoneKey} />
+        </div>
       )
     })
     return(

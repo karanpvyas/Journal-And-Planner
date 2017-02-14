@@ -77,12 +77,12 @@ export default class TodoBox extends React.Component {
     this._setState(allTodos);
   }
 
-  completeTodo = (timeCreated) => {
+  toggleCompleteState = (timeCreated) => {
     //think of a better implementation
     let allTodos = this.state.allTodos;
     for (let todo of allTodos) {
       if(todo.timeCreated === timeCreated){
-        todo.status = 'Complete'
+        todo.status = todo.status === 'Complete' ? 'Incomplete' : 'Complete'
       }
     }
     this._setState(allTodos);
@@ -110,7 +110,7 @@ export default class TodoBox extends React.Component {
           <input id = "newTodoInput" type="text" placeholder="Any work pending?" onKeyDown={this.checkForEnter.bind(this)} />
           <button onClick={this.addTodo} className="standard-add-button">Add</button>
         </div>
-        <TodoList allTodos={this.state.allTodos} deleteTodo={this.deleteTodo} completeTodo={this.completeTodo}/>
+        <TodoList allTodos={this.state.allTodos} deleteTodo={this.deleteTodo} toggleCompleteState={this.toggleCompleteState}/>
       </div>
     )
   }
